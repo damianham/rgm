@@ -37,7 +37,7 @@ installs the moment dependency into './node_modules/moment' and adds the depende
 
 ## Compared to Crystal
 
-Crystal is an alternative to Ruby.  It looks like Ruby (with static typing) - but it is compiled down to an executable so is blazingly fast.  Crystal's package manager is called ***shards*** and the package dependencies for a project are configured in a ***shard.yml*** file in the project root.  The dependencies are installed with 
+Crystal is an alternative to Ruby.  It looks like Ruby (with static typing) - but it is compiled down to an executable so is blazingly fast.  Crystal's package manager is called ***shards*** and the package dependencies for a project are configured in a ***shard.yml*** file in the project root.  The dependencies are installed with
 ```
 $ shards install
 ```
@@ -64,7 +64,9 @@ So this is the idea behind this project.  Manage gem dependencies and by default
 - provide a cli option to fork the gem and replace the clone with your fork so you can edit and issue a PR
 - only 1 version of a gem should be installed in a project, using the latest possible version number
 - no need for version number in the gem folder name
-- maintain package dependecies in either Gemfile or in sections in package.json if no Gemfile exists
-
-
-
+- maintain package dependencies in either Gemfile or in sections in package.json if no Gemfile exists
+- support scoped packages (@namespace/package)
+- support github packages
+  - damianham/has_generic_list
+  - damianham/@repo/package_name  -> github:damianham/@repo/packages/package_name
+- if multiple tagged repositories have the same package name offer user a choice
