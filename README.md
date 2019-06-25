@@ -9,9 +9,13 @@ So this is the idea behind this project.  Manage gem dependencies and by default
 ### Some ideas about how it will work
 
 - create an rgm command line program to manage ruby package dependencies
-- install gem dependencies into `./rgms`
-- clone the git project for the dependency into `./rgms`
+- install gem dependencies into `./rgm/gems`
+- clone the git project for the dependency into `./rgm/gems/gemname.n.n.n`
 - use git tags (rgm-package) to discover dependencies - fallback to rubygems.org
+- symlink the repo in the global cache into `./rgms`, ~/.rgm/gems/gemname.n.n.n -> ./rgms/gemname
+- rgm install should take < 1 sec if all gems are in the global cache
+- use https://github.com/jhawthorn/pub_grub version solver for tagged github gems
+- use bundler's version solver for gems from rubygems.org
 - provide a shim so that require("dependency") will find the dependency in ./rgms or default gem location
 - provide a cli option to fork the gem and replace the clone with your fork so you can edit and issue a PR
 - only 1 version of a gem should be installed in a project, using the latest possible version number
@@ -22,6 +26,16 @@ So this is the idea behind this project.  Manage gem dependencies and by default
   - damianham/has_generic_list
   - damianham/@repo/package_name  -> github:damianham/@repo/packages/package_name
 - if multiple tagged repositories have the same package name offer user a choice
+- `rgm discover` command to discover gems
+  - use git tags to identify gems by function e.g. rgm-database, rgm-blockchain, rgm-cache etc.
+```
+$ rgm discover database
+```
+lists all gems tagged with rgm-database
+```
+$ rgm discover tags
+```
+lists all rgm tags
 
 ## Dude where's my gem?
 
@@ -81,5 +95,8 @@ dependencies:
     #branch: master
     version: 0.27.0
  ```
- 
 The `amber` package from https://github.com/amberframework/amber will be installed in `./lib/amber`, making it super easy to open up the source for the Amber web framework in your code editor.
+
+## See also
+- [Gel](https://github.com/gel-rb/gel) - A modern gem manager
+
